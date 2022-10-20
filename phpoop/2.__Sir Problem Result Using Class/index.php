@@ -8,19 +8,10 @@
        $num1 =  $_POST["num1"];
        $num2 =  $_POST["num2"];
        $totalNumber = $r-> sum($num1, $num2);
-       $grade = $r-> grade($totalNumber);
-       
-
+       $grade = $r->grade($totalNumber);
     }
 
 ?>
-
-
-
-
-
-
-
 
 
 <!DOCTYPE html>
