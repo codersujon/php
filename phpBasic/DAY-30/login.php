@@ -1,23 +1,35 @@
-<!DOCTYPE html>
-<html lang="en">
+<?php require_once 'header.php'?>
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
-    <!-- Styles Include -->
-    <link rel="stylesheet" href="./assets/css/bootstrap.min.css">
-</head>
-
-<body>
 
     <!-- Login Page Start -->
-    <div class="login py-5">
+    <div class="login vh-100 d-flex align-items-center">
         <div class="container">
             <div class="row">
                 <div class="col-md-4 offset-md-4 ">
+
+                <?php 
+                    session_start();
+                    if(isset($_SESSION["userinfo"])){
+                        header("Location: dashboard.php");
+                    }
+
+                    if(isset($_POST['login'])){
+                        $user =  $_POST['username'];
+                        $pass= $_POST['password'];
+
+                        if ($user == "admin" || $user == "csesujon155@gmail.com" && $pass == "1234") {
+                                header('Location: dashboard.php');
+                                $_SESSION['userinfo'] = $user;
+                                
+                        } else {
+                            echo '<div class="alert alert-danger fade-in-down">
+                                    <strong>Error:</strong> Your user ID or password is incorrect!
+                                  </div>';
+                        }
+                    }
+                ?>
                     <div class="login__form bg-light p-5 my-5 rounded border border-primary">
+                        
                         <form action="" method="POST">
                             <div class="form-group mb-4">
                                 <label for="username">User Name or Email</label>
@@ -28,9 +40,10 @@
                                 <input type="password" name="password" id="password" class="form-control border border-primary" placeholder="Password">
                             </div>
                             <div class="form-group">
-                                <button class="btn btn-primary">Login</button>
+                                <button class="btn btn-primary" name="login">Login</button>
                             </div>
                         </form>
+                        <p>Are you new member? <a href="registration.php"> Register Now</a></p>
                     </div>
                 </div>
             </div>
@@ -38,10 +51,4 @@
     </div>
     <!-- Login Page End -->
 
-
-    <!-- JS Include -->
-    <script src="./assets/js/jquery-3.6.1.min.js"></script>
-    <script src="./assets/js/bootstrap.bundle.min.js"></script>
-</body>
-
-</html>
+    <?php require_once 'footer.php'?>
